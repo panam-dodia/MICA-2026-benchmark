@@ -19,7 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-This license covers the code in this repository. AlphaFold3 predictions referenced by or distributed with this
-benchmark are not covered by it; they are subject to the AlphaFold Server Output Terms of Use
-(https://alphafoldserver.com/output-terms). PDB and EMDB data are distributed by their archives under CC0.
