@@ -1,0 +1,2 @@
+af3/results/fold_9szb_2/fold_9szb_2_model_0.cif
+af3/results/fold_9szb_1/fold_9szb_1_model_0.cif

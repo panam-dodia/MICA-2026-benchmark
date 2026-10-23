@@ -1,0 +1,20 @@
+[
+  {
+    "name": "9thk_1",
+    "modelSeeds": [
+      "2026"
+    ],
+    "sequences": [
+      {
+        "proteinChain": {
+          "sequence": "MNPASDGGTSESIFDLDYASWGIRSTLMVAGFVFYLGVFVVCHQLSSSLNATYRSLVAREKVFWDLAATRAVFGVQSTAAGLWALLGDPVLHADKARGQQNWCWFHITTATGFFCFENVAVHLSNLIFRTFDLFLVIHHLFAFLGFLGCLVNLQAGHYLAMTTLLLEMSTPFTCVSWMLLKAGWSESLFWKLNQWLMIHMFHCRMVLTYHMWWVCFWHWDGLVSSLYLPHLTLFLVGLALLTLIINPYWTHKKTQQLLNPVDWNFAQPEAKSRPEGNGQLLRKKRPDAAIEGR",
+          "count": 1,
+          "useStructureTemplate": true,
+          "maxTemplateDate": "2025-02-03"
+        }
+      }
+    ],
+    "dialect": "alphafoldserver",
+    "version": 1
+  }
+]

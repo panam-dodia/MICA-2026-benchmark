@@ -1,0 +1,276 @@
+"""Final benchmark analysis -> eval/analysis.md (+ eval/per_entry_wide.csv).
+
+Inputs: eval/scores.csv (parse_scores.py), dataset/benchmark_30_details.csv, dataset/benchmark_30_sizes.csv.
+Sections:
+  1. Completion per method (failures counted, never imputed)
+  2. Means/medians on the common subset (entries every method built) and on each method's own successes
+  3. Paired comparisons MICA vs each method on TM-score (and other metrics): paired t-test (as in the MICA paper)
+     and Wilcoxon signed-rank (normal approximation with tie correction), plus win/tie/loss counts
+  4. Breakdowns of TM-score by size (deposited and modeled bins), resolution and symmetric reference
+  5. Per-entry TM-score table
+Standard library only (incomplete beta for the t distribution implemented below).
+"""
+import csv
+import math
+from pathlib import Path
+from statistics import mean, median, stdev
+
+ROOT = Path(__file__).resolve().parent.parent
+METHODS = ["mica", "emodelx_af", "modelangelo", "cryoatom", "emprot"]
+NAMES = {"mica": "MICA", "emodelx_af": "EModelX(+AF)", "modelangelo": "ModelAngelo", "cryoatom": "CryoAtom", "emprot": "EMProt"}
+METRICS = [("tm_score", "TM-score", 3), ("ca_match", "Cα match (%)", 1), ("seq_match", "Seq. match (%)", 1),
+           ("ca_quality", "Cα quality", 1), ("aligned_len", "Aligned Cα length", 0), ("seq_identity", "Seq. identity", 3),
+           ("recall", "Recall (%)", 1)]
+
+
+# ---------- statistics (stdlib) ----------
+def betacf(a, b, x):
+    m_max, eps, fpmin = 300, 3e-14, 1e-300
+    qab, qap, qam = a + b, a + 1, a - 1
+    c, d = 1.0, 1 - qab * x / qap
+    d = 1 / (d if abs(d) > fpmin else fpmin)
+    h = d
+    for m in range(1, m_max + 1):
+        m2 = 2 * m
+        aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+        d = 1 + aa * d; d = 1 / (d if abs(d) > fpmin else fpmin)
+        c = 1 + aa / c if abs(1 + aa / c) > fpmin else fpmin
+        h *= d * c
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+        d = 1 + aa * d; d = 1 / (d if abs(d) > fpmin else fpmin)
+        c = 1 + aa / c if abs(1 + aa / c) > fpmin else fpmin
+        de = d * c
+        h *= de
+        if abs(de - 1) < eps:
+            break
+    return h
+
+
+def betainc(a, b, x):
+    if x <= 0: return 0.0
+    if x >= 1: return 1.0
+    lbt = math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b) + a * math.log(x) + b * math.log(1 - x)
+    if x < (a + 1) / (a + b + 2):
+        return math.exp(lbt) * betacf(a, b, x) / a
+    return 1 - math.exp(lbt) * betacf(b, a, 1 - x) / b
+
+
+def paired_t(a, b):
+    d = [x - y for x, y in zip(a, b)]
+    n = len(d)
+    if n < 3 or stdev(d) == 0:
+        return float("nan"), float("nan")
+    t = mean(d) / (stdev(d) / math.sqrt(n))
+    df = n - 1
+    p = betainc(df / 2, 0.5, df / (df + t * t))      # two-sided
+    return t, p
+
+
+def wilcoxon(a, b):
+    d = [x - y for x, y in zip(a, b) if x != y]
+    n = len(d)
+    if n < 6:
+        return float("nan"), float("nan")
+    order = sorted(range(n), key=lambda i: abs(d[i]))
+    ranks = [0.0] * n
+    i = 0
+    tie_term = 0.0
+    while i < n:
+        j = i
+        while j + 1 < n and abs(d[order[j + 1]]) == abs(d[order[i]]):
+            j += 1
+        r = (i + j) / 2 + 1
+        for k in range(i, j + 1):
+            ranks[order[k]] = r
+        t_ = j - i + 1
+        tie_term += t_ ** 3 - t_
+        i = j + 1
+    w_plus = sum(r for r, x in zip(ranks, d) if x > 0)
+    mu = n * (n + 1) / 4
+    sigma = math.sqrt(n * (n + 1) * (2 * n + 1) / 24 - tie_term / 48)
+    z = (w_plus - mu) / sigma
+    p = math.erfc(abs(z) / math.sqrt(2))
+    return w_plus, p
+
+
+# ---------- data ----------
+def fnum(x):
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return None
+
+
+def load():
+    scores = list(csv.DictReader(open(ROOT / "eval" / "scores.csv", encoding="utf-8")))
+    det = {r["pdb_id"]: r for r in csv.DictReader(open(ROOT / "dataset" / "benchmark_30_details.csv", encoding="utf-8"))}
+    siz = {r["pdb_id"]: r for r in csv.DictReader(open(ROOT / "dataset" / "benchmark_30_sizes.csv", encoding="utf-8"))}
+    ok = {m: {} for m in METHODS}
+    status = {m: {} for m in METHODS}
+    for r in scores:
+        if r["method"] not in ok:
+            continue
+        status[r["method"]][r["pdb"]] = r["status"]
+        if r["status"] == "ok":
+            ok[r["method"]][r["pdb"]] = r
+    return ok, status, det, siz
+
+
+def fmt(v, nd):
+    if v is None or (isinstance(v, float) and math.isnan(v)):
+        return "–"
+    return f"{v:.{nd}f}" if nd else f"{v:.0f}"
+
+
+def pfmt(p):
+    if p is None or math.isnan(p): return "–"
+    return "<0.001" if p < 0.001 else f"{p:.3f}"
+
+
+def main():
+    ok, status, det, siz = load()
+    entries = sorted(det, key=lambda p: int(det[p]["residue_count"]))
+    common = [p for p in entries if all(p in ok[m] for m in METHODS)]
+    sym = {p for p in entries if p in ("9I8C", "9SZB", "12ZE")}
+    out = []
+    w = out.append
+
+    w("# Benchmark analysis (auto-generated by scripts/analyze.py)\n")
+    w(f"Entries: {len(entries)}. Common subset (all 5 methods produced a model): **{len(common)}** "
+      f"(missing: {', '.join(p for p in entries if p not in common)}).\n")
+
+    # 1. completion
+    w("## 1. Completion\n")
+    w("| Method | Models | Failed | Failed entries |")
+    w("|---|---|---|---|")
+    for m in METHODS:
+        failed = [p for p in entries if p not in ok[m]]
+        w(f"| {NAMES[m]} | {len(ok[m])}/30 | {len(failed)} | {', '.join(failed) or '–'} |")
+    w("")
+
+    # 2. summary tables
+    def summary(ids_for, title):
+        w(f"## {title}\n")
+        w("| Method | n | " + " | ".join(f"{lab} mean (median)" for _, lab, _ in METRICS) + " |")
+        w("|---|---|" + "---|" * len(METRICS))
+        for m in METHODS:
+            ids = ids_for(m)
+            cells = []
+            for k, _, nd in METRICS:
+                v = [fnum(ok[m][p][k]) for p in ids if fnum(ok[m][p][k]) is not None]
+                cells.append(f"{fmt(mean(v), nd)} ({fmt(median(v), nd)})" if v else "–")
+            w(f"| {NAMES[m]} | {len(ids)} | " + " | ".join(cells) + " |")
+        w("")
+    summary(lambda m: common, f"2a. Common subset (n={len(common)})")
+    summary(lambda m: [p for p in common if p not in sym], f"2b. Common subset without symmetric-reference entries (n={len([p for p in common if p not in sym])})")
+    summary(lambda m: [p for p in entries if p in ok[m]], "2c. Each method's own successful entries")
+
+    # 3. paired comparisons
+    w("## 3. Paired comparisons: MICA vs each method (entries both built)\n")
+    w("Paired t-test (as in the MICA paper) and Wilcoxon signed-rank (normal approximation). Δ = MICA − other.\n")
+    w("| vs | Metric | n | MICA mean | Other mean | Δ mean | MICA wins/ties/losses | t | p (t-test) | p (Wilcoxon) |")
+    w("|---|---|---|---|---|---|---|---|---|---|")
+    for m in METHODS[1:]:
+        pairs = [p for p in entries if p in ok["mica"] and p in ok[m]]
+        for k, lab, nd in METRICS:
+            a, b = [], []
+            for p in pairs:
+                x, y = fnum(ok["mica"][p][k]), fnum(ok[m][p][k])
+                if x is not None and y is not None:
+                    a.append(x); b.append(y)
+            if len(a) < 3:
+                continue
+            t, pt = paired_t(a, b)
+            _, pw = wilcoxon(a, b)
+            wins = sum(x > y for x, y in zip(a, b)); ties = sum(x == y for x, y in zip(a, b))
+            w(f"| {NAMES[m]} | {lab} | {len(a)} | {fmt(mean(a), max(nd, 1))} | {fmt(mean(b), max(nd, 1))} | "
+              f"{fmt(mean(a) - mean(b), max(nd, 1) + 1)} | {wins}/{ties}/{len(a) - wins - ties} | {fmt(t, 2)} | {pfmt(pt)} | {pfmt(pw)} |")
+    w("")
+
+    # 4. breakdowns (TM-score on common subset)
+    def bin_res(p):
+        r = float(det[p]["resolution"])
+        return "<2.5 Å" if r < 2.5 else ("2.5–3.0 Å" if r < 3.0 else ("3.0–3.5 Å" if r < 3.5 else "3.5–4.0 Å"))
+    groups = [
+        ("Size bin (deposited residues, as sampled)", lambda p: det[p]["size_bin"], ["300-700", "700-1400", "1400-2500"]),
+        ("Size bin (modeled residues)", lambda p: siz[p]["bin_modeled"], ["300-700", "700-1400", "1400-2500"]),
+        ("Map resolution", bin_res, ["<2.5 Å", "2.5–3.0 Å", "3.0–3.5 Å", "3.5–4.0 Å"]),
+        ("Unique protein entities", lambda p: "1 entity" if int(det[p]["unique_chain_count"]) == 1 else "≥2 entities", ["1 entity", "≥2 entities"]),
+        ("Deposited chains", lambda p: "1 chain" if int(next(r for r in csv.DictReader(open(ROOT / 'dataset' / 'candidates_2026.csv', encoding='utf-8')) if r['pdb_id'] == p)['n_chains']) == 1 else "≥2 chains", ["1 chain", "≥2 chains"]),
+    ]
+    w(f"## 4. TM-score by subgroup (common subset, n={len(common)}; mean, with n per group)\n")
+    for title, key, order in groups:
+        w(f"**{title}**\n")
+        w("| Group | n | " + " | ".join(NAMES[m] for m in METHODS) + " |")
+        w("|---|---|" + "---|" * len(METHODS))
+        for g in order:
+            ids = [p for p in common if key(p) == g]
+            if not ids:
+                continue
+            w(f"| {g} | {len(ids)} | " + " | ".join(fmt(mean(float(ok[m][p]['tm_score']) for p in ids), 3) for m in METHODS) + " |")
+        w("")
+
+    # 4b. runtimes (final attempt per entry, successful entries only)
+    tdir = ROOT / "runs" / "timings"
+    tfile = {"mica": "mica", "emodelx_af": "emodelx", "modelangelo": "modelangelo", "cryoatom": "cryoatom", "emprot": "emprot"}
+    first_step = {"mica": "process_AF3", "emodelx_af": "run_py", "modelangelo": "build", "cryoatom": "build", "emprot": "build"}
+    runtime = {m: {} for m in METHODS}
+    for m in METHODS:
+        f = tdir / f"{tfile[m]}_timings.csv"
+        if not f.exists():
+            continue
+        rows = sorted(csv.DictReader(open(f, encoding="utf-8")), key=lambda r: r["start"])
+        by_pdb = {}
+        for r in rows:
+            by_pdb.setdefault(r["pdb"], []).append(r)
+        for p, rs in by_pdb.items():
+            starts = [i for i, r in enumerate(rs) if r["step"] == first_step[m]]
+            if starts and p in ok[m]:
+                runtime[m][p] = sum(int(r["seconds"]) for r in rs[starts[-1]:]) / 60.0
+    w("## 4b. Wall-clock runtime per entry (minutes; final attempt; successful entries)\n")
+    w("One method ran at a time on the GPU (RTX 3090, Ryzen 9 5900X, 50 GB RAM for WSL). Scoring jobs (CPU) sometimes overlapped.\n"
+      "MICA and EModelX(+AF) include Phenix docking/refinement; MICA's first 22 entries ran under the 31 GB WSL memory cap.\n")
+    w("| Method | n | median | mean | max | total (h) | median 300–700 | median 700–1400 | median 1400–2500 |")
+    w("|---|---|---|---|---|---|---|---|---|")
+    for m in METHODS:
+        v = runtime[m]
+        if not v:
+            w(f"| {NAMES[m]} | 0 | – | – | – | – | – | – | – |")
+            continue
+        bins = [median([t for p, t in v.items() if det[p]["size_bin"] == b]) if any(det[p]["size_bin"] == b for p in v) else None
+                for b in ("300-700", "700-1400", "1400-2500")]
+        w(f"| {NAMES[m]} | {len(v)} | {fmt(median(v.values()), 1)} | {fmt(mean(v.values()), 1)} | {fmt(max(v.values()), 0)} | "
+          f"{fmt(sum(v.values()) / 60, 1)} | " + " | ".join(fmt(x, 1) for x in bins) + " |")
+    w("")
+
+    # 5. per-entry table
+    w("## 5. Per-entry TM-score (– = no model)\n")
+    w("| PDB | EMDB | Res. (Å) | Deposited res. | Modeled res. | " + " | ".join(NAMES[m] for m in METHODS) + " | Best |")
+    w("|---|---|---|---|---|" + "---|" * len(METHODS) + "---|")
+    best_count = {m: 0 for m in METHODS}
+    for p in entries:
+        vals = {m: fnum(ok[m][p]["tm_score"]) if p in ok[m] else None for m in METHODS}
+        present = {m: v for m, v in vals.items() if v is not None}
+        best = max(present, key=present.get) if present else None
+        if best and p in common:
+            best_count[best] += 1
+        w(f"| {p} | {det[p]['emdb_id']} | {det[p]['resolution']} | {det[p]['residue_count']} | {siz[p]['modeled_residues']} | "
+          + " | ".join(("**" + fmt(vals[m], 3) + "**") if m == best else fmt(vals[m], 3) for m in METHODS) + f" | {NAMES.get(best, '–')} |")
+    w("")
+    w("Highest TM-score per entry on the common subset: " + ", ".join(f"{NAMES[m]} {best_count[m]}" for m in METHODS) + ".\n")
+
+    (ROOT / "eval" / "analysis.md").write_text("\n".join(out), encoding="utf-8")
+    with open(ROOT / "eval" / "per_entry_wide.csv", "w", newline="", encoding="utf-8") as fh:
+        cols = ["pdb", "emdb", "resolution", "deposited_residues", "modeled_residues", "size_bin"] + \
+               [f"{m}_{k}" for m in METHODS for k, _, _ in METRICS]
+        wr = csv.writer(fh)
+        wr.writerow(cols)
+        for p in entries:
+            wr.writerow([p, det[p]["emdb_id"], det[p]["resolution"], det[p]["residue_count"], siz[p]["modeled_residues"], det[p]["size_bin"]] +
+                        [ok[m][p][k] if p in ok[m] else "" for m in METHODS for k, _, _ in METRICS])
+    # the Windows console (cp1252) cannot show some characters (e.g. α); the .md file is written as UTF-8 above
+    print("\n".join(out).encode("ascii", "replace").decode("ascii"))
+
+
+if __name__ == "__main__":
+    main()

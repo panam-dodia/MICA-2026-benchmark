@@ -1,0 +1,3 @@
+af3/results/fold_9ux8_2/fold_9ux8_2_model_0.cif
+af3/results/fold_9ux8_1/fold_9ux8_1_model_0.cif
+af3/results/fold_9ux8_1/fold_9ux8_1_model_0.cif

@@ -1,0 +1,52 @@
+pdb_id,emdb_ids,n_emdb,release_date,resolution,n_residues_modeled,n_chains,n_protein_entities,n_polymer_entities,n_ligand_instances,max_entity_seq_len,n_nonstd_residues,title,reconstruction_method,aggregation_state
+10AW,EMD-75037,1,2026-08-12,2.82,1419,3,1,1,0,473,0,Cryo-EM structure of 50 kDa outer membrane protein (omp50) in C. jejuni,SINGLE PARTICLE,PARTICLE
+10ED,EMD-75104,1,2026-08-26,1.95,664,2,2,2,18,606,0,CbrXA SLC5-STAC domains,SINGLE PARTICLE,PARTICLE
+10TP,EMD-75462,1,2026-03-11,3.6,898,2,1,1,0,449,0,ArsB from L. ferriphilum in inward-facing state (parallel dimer),SINGLE PARTICLE,PARTICLE
+11BR,EMD-75606,1,2026-09-09,3.37,740,2,1,1,0,370,0,Structure of cholesterol binding deficient human TM6SF1,SINGLE PARTICLE,PARTICLE
+11CV,EMD-75626,1,2026-05-20,2.66,1304,4,1,1,0,326,0,"KpSwz DUF4062 (Tetramer, catalytic mutant E97A)",SINGLE PARTICLE,PARTICLE
+11ED,EMD-75646,1,2026-08-19,3.82,1687,3,3,3,0,969,0,C12 Portal Assembly of Bacteriophage Goslar,SINGLE PARTICLE,PARTICLE
+11YA,EMD-76178,1,2026-09-16,3.6,553,1,1,1,0,553,0,Staphylococcus aureus MurJ R176A mutant,SINGLE PARTICLE,PARTICLE
+12ZE,EMD-76875,1,2026-05-06,2.6,1732,2,1,1,0,866,0,CryoEM structure of Papaya Meleira Virus (PMeV) particles purified directly from Carica papaya latex,SINGLE PARTICLE,PARTICLE
+21DI,EMD-67586,1,2026-04-22,3.5,1206,9,1,1,0,134,0,Cryo-EM reconstruction of the cyanophage Pam5 small terminase,SINGLE PARTICLE,PARTICLE
+23PX,EMD-69160,1,2026-09-02,3.01,1520,1,1,1,1,1520,0,YghJ protein zymogen-like autoinhibited state,SINGLE PARTICLE,PARTICLE
+25JP,EMD-80160,1,2026-09-02,3.36,1596,2,1,1,4,798,0,Cryo-EM structure of the Arabidopsis thaliana potassium transporter 5 purified in the presence of NaCl and ATP,SINGLE PARTICLE,PARTICLE
+26FB,EMD-80605,1,2026-08-26,3.05,1345,3,3,3,0,728,0,Cryo-EM structure of the portal-nozzle of bacteriophage A1002,SINGLE PARTICLE,PARTICLE
+26LA,EMD-80738,1,2026-08-26,3.33,1280,4,3,3,0,620,0,Cryo-EM structure of the overall tail of bacteriophage A1002,SINGLE PARTICLE,PARTICLE
+26QG,EMD-80824,1,2026-09-02,3.2,394,1,1,1,2,394,0,Cryo-EM structure of human UGCG bound to UDP and C6-ceramide,SINGLE PARTICLE,PARTICLE
+30YW,EMD-58153,1,2026-06-17,2.8,1482,12,2,2,0,126,0,Stopper and tail terminator assembly of the phage OE33PA,SINGLE PARTICLE,PARTICLE
+30ZA,EMD-58160,1,2026-06-17,2.9,2412,12,1,1,12,201,0,Part of the tail tube of the phage OE33PA,SINGLE PARTICLE,PARTICLE
+37IB,EMD-78199,1,2026-08-12,3.2,967,1,1,1,2,967,0,"Sterile alpha motif domain-containing protein 9, residues 623-1589",SINGLE PARTICLE,PARTICLE
+43JF,EMD-67166,1,2026-09-23,3.62,750,1,1,1,0,750,0,Cryo-EM structure of bacteriophage Avs-1 TMP protein,SINGLE PARTICLE,PARTICLE
+9GJD,EMD-51388,1,2026-02-11,3.2,958,2,2,2,2,670,0,"Entamoeba histolytica Gal/GalNAc lectin in presence of monoclonal antibody CP33-H/L-LA22, mode I",SINGLE PARTICLE,PARTICLE
+9HXD,EMD-52464,1,2026-07-22,3.55,1186,2,1,1,0,593,0,Bacterial antiviral defense protein Ec2ApeA from Escherichia coli strain 2-156-04_S4_C1 (oligomerization mutant R551E),SINGLE PARTICLE,PARTICLE
+9HXL,EMD-52481,1,2026-07-22,3.1,1092,2,1,1,0,546,0,Putative bacterial antiviral defense protein Thr1ApeA from Thermoactinospora rubra strain YIM 77501,SINGLE PARTICLE,PARTICLE
+9I8C,EMD-52713,1,2026-02-18,2.7,338,1,1,1,0,338,0,GBSV1 portal protein without the N-terminal tail,SINGLE PARTICLE,PARTICLE
+9JBU,EMD-61326,1,2026-03-11,3.8,569,1,1,1,1,569,0,Structure of LAT4 in complex with digitonin,SINGLE PARTICLE,PARTICLE
+9LW3,EMD-63427,1,2026-05-27,3.0,594,2,1,1,24,297,0,TMEM164-substrate,SINGLE PARTICLE,PARTICLE
+9N00,EMD-48771,1,2026-08-26,2.72,1523,1,1,1,2,1523,0,Cryo-EM Structure of Apo SeAvs7,SINGLE PARTICLE,PARTICLE
+9OME,EMD-70611,1,2026-03-18,3.6,1998,18,1,1,0,111,0,CryoEM structure of FPM13,SINGLE PARTICLE,PARTICLE
+9OQ7,EMD-70742,1,2026-05-27,2.96,1095,3,1,1,18,365,0,Chlamydia muridarum Major Outer Membrane Protein,SINGLE PARTICLE,PARTICLE
+9PJA,EMD-71685,1,2026-06-03,2.8,1094,2,1,1,5,547,0,Cryo-EM structure of human NXPE1,SINGLE PARTICLE,PARTICLE
+9PZO,EMD-72074,1,2026-08-19,2.86,1810,4,3,3,4,606,0,heterotrimeric ENaC channel complex PPK1/PPK26/PPK26 with Vulnusin,SINGLE PARTICLE,PARTICLE
+9R8G,EMD-53820,1,2026-01-14,2.77,1314,2,2,2,0,996,0,Pseudomonas putida Pore-Forming Toxin Tke5 in complex with its cognate Type VI adaptor protein Tap3,SINGLE PARTICLE,PARTICLE
+9R9A,EMD-53855,1,2026-04-22,2.6,1728,2,1,1,0,864,0,CryoEM structure of a membrane protein associated with a contractile injection in Salmonella enterica subspecies salamae,SINGLE PARTICLE,PARTICLE
+9RCH,EMD-53922,1,2026-06-10,2.2,1995,2,2,2,0,1017,0,Cryo-EM structure of Yadonushi Virus 1,SINGLE PARTICLE,PARTICLE
+9RMI,EMD-54060,1,2026-04-08,3.92,2298,6,1,1,6,383,0,Cryo-EM structure of the CorM filament in the presence of CorR from cyanobacterium Anabaena sp. PCC 7120,SINGLE PARTICLE,FILAMENT
+9SDH,EMD-54786,1,2026-08-12,3.13,956,2,1,1,8,478,0,Cryo-EM structure of the Human RUS Family Protein 1 Homodimer,SINGLE PARTICLE,PARTICLE
+9SF9,EMD-54817,1,2026-09-02,2.8,1126,2,1,1,0,563,0,Dimeric form of the Streptococcus pyogenes nuclease A (SpnA),SINGLE PARTICLE,PARTICLE
+9SRV,EMD-55148,1,2026-10-07,3.65,1244,1,1,1,0,1244,0,Partial cryo-EM structure of essential Mycoplasma pneumoniae lipoprotein Mpn436 (flexible loops excluded),SINGLE PARTICLE,PARTICLE
+9SZB,EMD-55364,1,2026-08-26,2.78,410,2,2,2,0,314,0,Structure of the portal and head-tail connector of Lactococcus phage Nocturne116,SINGLE PARTICLE,PARTICLE
+9T9R,EMD-55728,1,2026-08-19,3.9,1605,8,2,2,0,235,0,Structure of bacteriophage NO16,SINGLE PARTICLE,PARTICLE
+9THK,EMD-55929,1,2026-07-29,3.6,586,2,1,1,2,293,0,Structure of human CLN8 in an apo-state,SINGLE PARTICLE,PARTICLE
+9TUD,EMD-56257,1,2026-08-26,3.3,1119,1,1,1,0,1119,0,CryoEM structure of DruH from Druantia type III,SINGLE PARTICLE,PARTICLE
+9UX8,EMD-64576,1,2026-03-25,3.71,1439,3,2,2,0,562,0,CryoEM Structure of LmuAB Apo State,SINGLE PARTICLE,PARTICLE
+9V3Z,EMD-64762,1,2026-07-29,3.4,476,1,1,1,2,476,0,SLC36A1 bound to D-NPA,SINGLE PARTICLE,PARTICLE
+9WQ3,EMD-66158,1,2026-04-01,3.27,2214,6,1,1,6,369,0,Structure of 3TM-SAVED Filament bound to 2'3'-cGAMP,SINGLE PARTICLE,PARTICLE
+9WUF,EMD-66260,1,2026-02-11,3.01,1272,1,1,1,0,1272,0,Cryo-EM structure of Upx,SINGLE PARTICLE,PARTICLE
+9X2M,EMD-66479,1,2026-03-04,3.44,1518,6,2,2,3,319,0,Gut transporter with sorbitol,SINGLE PARTICLE,PARTICLE
+9Y6N,EMD-72623,1,2026-07-22,2.68,816,3,1,1,0,272,0,Extracellular domain of human FAM171A2,SINGLE PARTICLE,PARTICLE
+9YB0,EMD-72744,1,2026-09-30,3.76,1538,2,1,1,0,769,0,EcAVS5 dimer,SINGLE PARTICLE,PARTICLE
+9YFW,EMD-72909,1,2026-06-10,3.21,656,1,1,1,0,656,0,VPS13A central bridge domain,SINGLE PARTICLE,PARTICLE
+9YGA,EMD-72917,1,2026-09-30,2.9,1968,12,1,1,0,164,0,CryoEM structure of F7 pyocin tail tube,SINGLE PARTICLE,PARTICLE
+9ZA1,EMD-73963,1,2026-06-10,3.4,2064,8,1,1,0,258,0,cryoEM structure of COMMD-like protein S4Y171 octamer,SINGLE PARTICLE,2D ARRAY
+9ZDX,EMD-74076,1,2026-04-08,2.95,2456,2,1,1,4,1228,0,Dimer of ATPase BrxC containing a Walker B mutation and bound to ATP from the Acinetobacter BREX system,SINGLE PARTICLE,3D ARRAY

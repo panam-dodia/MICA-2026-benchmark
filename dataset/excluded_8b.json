@@ -1,0 +1,17 @@
+[
+ {
+  "pdb_id": "9PX8",
+  "reasons": "amyloid/fibril ('amyloid'); longest chain 31 < 50",
+  "title": "Cryo-EM structure of designed Orb2 amyloid (LVLVF, polymorph 1)"
+ },
+ {
+  "pdb_id": "9PZD",
+  "reasons": "amyloid/fibril ('amyloid'); longest chain 31 < 50",
+  "title": "Cryo-EM structure of designed Orb2 amyloid (LVLVF, polymorph 2)"
+ },
+ {
+  "pdb_id": "9Q37",
+  "reasons": "amyloid/fibril ('amyloid'); longest chain 31 < 50",
+  "title": "Cryo-EM structure of designed Orb2 amyloid (LVLVF, polymorph 3)"
+ }
+]

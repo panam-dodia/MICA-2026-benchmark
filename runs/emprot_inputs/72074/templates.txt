@@ -1,0 +1,4 @@
+af3/results/fold_9pzo_3/fold_9pzo_3_model_0.cif
+af3/results/fold_9pzo_3/fold_9pzo_3_model_0.cif
+af3/results/fold_9pzo_2/fold_9pzo_2_model_0.cif
+af3/results/fold_9pzo_1/fold_9pzo_1_model_0.cif

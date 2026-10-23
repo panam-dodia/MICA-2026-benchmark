@@ -1,0 +1,10 @@
+method,subset,n_scored,n_failed,mean_tm_score,median_tm_score,mean_ca_match,mean_seq_match,mean_ca_quality,mean_aligned_len,mean_seq_identity,mean_recall
+mica,all_scored,28,2,0.88,0.966,92.146,94.554,91.115,827.5,0.962,89.543
+mica,non_symmetric,26,2,0.88,0.966,91.758,94.242,91.115,867.423,0.961,92.281
+mica,common,28,2,0.88,0.966,92.146,94.554,91.115,827.5,0.962,89.543
+modelangelo,all_scored,30,0,0.747,0.892,91.087,94.913,79.001,752.333,0.961,81.58
+modelangelo,non_symmetric,27,0,0.721,0.865,90.452,94.481,79.001,753.704,0.957,79.656
+modelangelo,common,28,0,0.729,0.872,94.304,98.25,82.04,709.857,0.958,83.932
+emodelx_af,all_scored,28,2,0.879,0.937,91.104,91.821,90.416,863.786,0.95,90.718
+emodelx_af,non_symmetric,26,2,0.888,0.937,90.554,91.538,90.416,908.962,0.953,92.015
+emodelx_af,common,28,2,0.879,0.937,91.104,91.821,90.416,863.786,0.95,90.718

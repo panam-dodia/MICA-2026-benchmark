@@ -1,0 +1,31 @@
+pdb_id,emdb_id,resolution,residue_count,unique_chain_count,size_bin,release_date,title
+9I8C,EMD-52713,2.7,338,1,300-700,2026-02-18,GBSV1 portal protein without the N-terminal tail
+26QG,EMD-80824,3.2,394,1,300-700,2026-09-02,Cryo-EM structure of human UGCG bound to UDP and C6-ceramide
+9SZB,EMD-55364,2.78,410,2,300-700,2026-08-26,Structure of the portal and head-tail connector of Lactococcus phage Nocturne116
+9V3Z,EMD-64762,3.4,476,1,300-700,2026-07-29,SLC36A1 bound to D-NPA
+11YA,EMD-76178,3.6,553,1,300-700,2026-09-16,Staphylococcus aureus MurJ R176A mutant
+9JBU,EMD-61326,3.8,569,1,300-700,2026-03-11,Structure of LAT4 in complex with digitonin
+9THK,EMD-55929,3.6,586,1,300-700,2026-07-29,Structure of human CLN8 in an apo-state
+9LW3,EMD-63427,3.0,594,1,300-700,2026-05-27,TMEM164-substrate
+9YFW,EMD-72909,3.21,656,1,300-700,2026-06-10,VPS13A central bridge domain
+10ED,EMD-75104,1.95,664,2,300-700,2026-08-26,CbrXA SLC5-STAC domains
+9SDH,EMD-54786,3.13,956,1,700-1400,2026-08-12,Cryo-EM structure of the Human RUS Family Protein 1 Homodimer
+9GJD,EMD-51388,3.2,958,2,700-1400,2026-02-11,"Entamoeba histolytica Gal/GalNAc lectin in presence of monoclonal antibody CP33-H/L-LA22, mode I"
+9HXL,EMD-52481,3.1,1092,1,700-1400,2026-07-22,Putative bacterial antiviral defense protein Thr1ApeA from Thermoactinospora rubra strain YIM 77501
+9PJA,EMD-71685,2.8,1094,1,700-1400,2026-06-03,Cryo-EM structure of human NXPE1
+9TUD,EMD-56257,3.3,1119,1,700-1400,2026-08-26,CryoEM structure of DruH from Druantia type III
+9SF9,EMD-54817,2.8,1126,1,700-1400,2026-09-02,Dimeric form of the Streptococcus pyogenes nuclease A (SpnA)
+21DI,EMD-67586,3.5,1206,1,700-1400,2026-04-22,Cryo-EM reconstruction of the cyanophage Pam5 small terminase
+9SRV,EMD-55148,3.65,1244,1,700-1400,2026-10-07,Partial cryo-EM structure of essential Mycoplasma pneumoniae lipoprotein Mpn436 (flexible loops excluded)
+9WUF,EMD-66260,3.01,1272,1,700-1400,2026-02-11,Cryo-EM structure of Upx
+26FB,EMD-80605,3.05,1345,3,700-1400,2026-08-26,Cryo-EM structure of the portal-nozzle of bacteriophage A1002
+10AW,EMD-75037,2.82,1419,1,1400-2500,2026-08-12,Cryo-EM structure of 50 kDa outer membrane protein (omp50) in C. jejuni
+9UX8,EMD-64576,3.71,1439,2,1400-2500,2026-03-25,CryoEM Structure of LmuAB Apo State
+9T9R,EMD-55728,3.9,1605,2,1400-2500,2026-08-19,Structure of bacteriophage NO16
+9R9A,EMD-53855,2.6,1728,1,1400-2500,2026-04-22,CryoEM structure of a membrane protein associated with a contractile injection in Salmonella enterica subspecies salamae
+12ZE,EMD-76875,2.6,1732,1,1400-2500,2026-05-06,CryoEM structure of Papaya Meleira Virus (PMeV) particles purified directly from Carica papaya latex
+9PZO,EMD-72074,2.86,1810,3,1400-2500,2026-08-19,heterotrimeric ENaC channel complex PPK1/PPK26/PPK26 with Vulnusin
+9OME,EMD-70611,3.6,1998,1,1400-2500,2026-03-18,CryoEM structure of FPM13
+9WQ3,EMD-66158,3.27,2214,1,1400-2500,2026-04-01,Structure of 3TM-SAVED Filament bound to 2'3'-cGAMP
+9RMI,EMD-54060,3.92,2298,1,1400-2500,2026-04-08,Cryo-EM structure of the CorM filament in the presence of CorR from cyanobacterium Anabaena sp. PCC 7120
+30ZA,EMD-58160,2.9,2412,1,1400-2500,2026-06-17,Part of the tail tube of the phage OE33PA

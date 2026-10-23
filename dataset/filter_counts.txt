@@ -1,0 +1,19 @@
+0. EM, released 2026, <=4.0 A, no nucleic acid (RCSB search)            4381
+1. single-particle reconstruction                                       4050
+2. exactly one EMDB map                                                 4046
+3. 1.5 <= resolution <= 4.0 A                                           4042
+4. all polymer entities are protein                                     4041
+5. no non-standard residues                                             3697
+6. 300 <= deposited polymer residues <= 2500                                      2232
+7. <= 4 unique protein entities                                         1916
+8. novel: no entity >25% identity to PDB entries released before 2026    109
+   -> 1807/1916 (94.3%) entries have an older >25% homolog
+8b. exclude amyloid/fibril and longest chain < 50 residues               106
+   removed 9PX8: amyloid/fibril ('amyloid'); longest chain 31 < 50 | Cryo-EM structure of designed Orb2 amyloid (LVLVF, polymorph 1)
+   removed 9PZD: amyloid/fibril ('amyloid'); longest chain 31 < 50 | Cryo-EM structure of designed Orb2 amyloid (LVLVF, polymorph 2)
+   removed 9Q37: amyloid/fibril ('amyloid'); longest chain 31 < 50 | Cryo-EM structure of designed Orb2 amyloid (LVLVF, polymorph 3)
+9. one entry per 25%-identity cluster                                     51
+   size bin 300-700 residues: available                                   10
+   size bin 700-1400 residues: available                                  20
+   size bin 1400-2500 residues: available                                 21
+10. stratified random sample                                              30

@@ -1,0 +1,8 @@
+af3/results/fold_9t9r_2/fold_9t9r_2_model_0.cif
+af3/results/fold_9t9r_2/fold_9t9r_2_model_0.cif
+af3/results/fold_9t9r_2/fold_9t9r_2_model_0.cif
+af3/results/fold_9t9r_1/fold_9t9r_1_model_0.cif
+af3/results/fold_9t9r_1/fold_9t9r_1_model_0.cif
+af3/results/fold_9t9r_1/fold_9t9r_1_model_0.cif
+af3/results/fold_9t9r_1/fold_9t9r_1_model_0.cif
+af3/results/fold_9t9r_1/fold_9t9r_1_model_0.cif

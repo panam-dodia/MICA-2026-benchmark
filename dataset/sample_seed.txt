@@ -1,0 +1,2 @@
+seed=2026
+rng=random.Random(seed); used first for cluster representatives (sorted clusters), then per size bin (pools sorted by pdb_id) in order [(300, 700), (700, 1400), (1400, 2500)]

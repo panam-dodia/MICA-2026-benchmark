@@ -1,0 +1,8 @@
+# Large data distributed through Zenodo (extract the Zenodo archives into the repository root)
+dataset/entries/
+af3/results/
+eval/raw/
+
+# Python
+__pycache__/
+*.pyc
